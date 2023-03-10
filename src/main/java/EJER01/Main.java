@@ -7,6 +7,7 @@ package EJER01;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 /**
  *
@@ -43,6 +44,13 @@ public class Main {
         Scanner teclado = new Scanner(System.in);
         String nombreIntroducir;
         boolean repetir = true;
+        /***
+         * 
+         * COMPARAR
+         * NO NOMBRES
+         * IGUALES
+         * 
+         */
         while (repetir) {
             System.out.println("Introduzca un nombre, escriba fin para salir:");
             nombreIntroducir=teclado.next();
@@ -72,7 +80,7 @@ public class Main {
             }
         }
     }
-    
+
     public static void metodoC() {
         System.out.println("Introduzca los datos para el primer HashSet:");
         System.out.println("");
@@ -90,7 +98,21 @@ public class Main {
     }
     
     public static void metodoD() {
-        
+        System.out.println("Introduzca los datos para el primer HashSet:");
+        System.out.println("");
+        HashSet <String> nombres1 = metodoA();
+        System.out.println("");
+        System.out.println("Introduzca los datos para el segundo HashSet:");
+        HashSet <String> nombres2 = metodoA();
+        System.out.println("");
+        for (String nombreComparar1 : nombres1) {
+            if (!nombres2.contains(nombreComparar1)) {
+                nombres2.add(nombreComparar1);
+            }
+        }
+        TreeSet<String> nombresOrdenados = new TreeSet(nombres2);
+        System.out.println("La lista de nombres de ambos HashSet ordenados por orden alfabético es la siguiente:");
+        System.out.println(nombresOrdenados);
     }
     
     public static byte menu() {
