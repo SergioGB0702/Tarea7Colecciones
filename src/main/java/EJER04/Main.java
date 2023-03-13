@@ -18,17 +18,17 @@ public class Main {
         boolean repetir = true;
         byte opcion;
         while (repetir) {
-            opcion=menu();
+            opcion = menu(); // Por cada repetición se muestra el menú y se devuelve el byte de la opción
             switch (opcion) {
                 case 1:
-                    idContrasenia.put( pedirID(), pedirContrasenia());
+                    idContrasenia.put(pedirID(), pedirContrasenia()); // Se añade un nuevo par al HashMap, llamando a los métodos que comprueban la validez de cada elemento
                     break;
                 case 2:
                     System.out.println("La lista de pares es:");
-                    System.out.println(idContrasenia);
+                    System.out.println(idContrasenia); // Se muestran los pares, si no hay se muestra vacío
                     break;
                 case 0:
-                    repetir=false;
+                    repetir = false; // Repetir pasa a false para salir del bucle y del programa
                     break;
                 default:
                     System.out.println("Opción incorrecta...");
@@ -37,7 +37,14 @@ public class Main {
         }
         System.out.println("Gracias por usar el programa");
     }
-    
+
+    /**
+     * Método que muestra el <strong>menú</strong> y que le pide al usuario una
+     * opción que devolverá mediante el correspondiente return, se capturan
+     * posibles excepciones
+     *
+     * @return opcion elegida por el usuario
+     */
     public static byte menu() {
         Scanner teclado = new Scanner(System.in);
         byte opcionElegida;
@@ -54,39 +61,51 @@ public class Main {
         }
         return opcionElegida;
     }
-    
-    public static int pedirID(){
-        int idDevolver=0;
-        boolean repetir =true;
+
+    /**
+     * Método <strong>pedirID</strong>, que solicita al usuario un ID y revisa
+     * que sea numérico, para después retornarlo comprobando excepciones
+     *
+     * @return ID válido
+     */
+    public static int pedirID() {
+        int idDevolver = 0;
+        boolean repetir = true;
         Scanner teclado = new Scanner(System.in);
         while (repetir) {
             try {
                 System.out.println("Introduzca el ID (Identificación numérica):");
-                idDevolver=teclado.nextInt();
-                repetir=false;
+                idDevolver = teclado.nextInt();
+                repetir = false; // Se pasa a false si no se lanza excepción
             } catch (Exception E) {
-                teclado.nextLine(); // Para capturar texto
+                teclado.nextLine(); // Para capturar texto de posible excepción
                 System.out.println("Introduzca un valor válido...");
             }
         }
-        return idDevolver;
+        return idDevolver; // Se devuelve el id revisado
     }
-    
-    public static String pedirContrasenia(){
-        String contraseniaDevolver="";
+
+    /**
+     * Método <strong>pedirContrasenia</strong> que pide al usuario una
+     * contraseña por pantalla y comprueba que sea alfanumérica, tras esto la
+     * devuelve
+     *
+     * @return contraseña validada
+     */
+    public static String pedirContrasenia() {
+        String contraseniaDevolver = "";
         boolean repetir = true;
         Scanner teclado = new Scanner(System.in);
         while (repetir) {
-                System.out.println("Introduzca la contraseña, debe ser alfanumérico:");
-                contraseniaDevolver=teclado.next();
-                if ((contraseniaDevolver.matches("([a-zA-Z]+[0-9]+).*||[0-9]+[a-zA-Z]+.*"))) { // Se comprueba que se escriban al menos un número y una letra
-                    repetir=false;
-                }
-                else {
-                    System.out.println("La contraseña no tiene un formato correcto...");
-                }
+            System.out.println("Introduzca la contraseña, debe ser alfanumérico:");
+            contraseniaDevolver = teclado.next();
+            if ((contraseniaDevolver.matches("([a-zA-Z]+[0-9]+).*||[0-9]+[a-zA-Z]+.*"))) { // Se comprueba que se escriban al menos un número y una letra
+                repetir = false;
+            } else { // En caso de no tener un formato correcto se muestra un mensaje notificándolo
+                System.out.println("La contraseña no tiene un formato correcto...");
+            }
         }
-        return contraseniaDevolver;
+        return contraseniaDevolver; // Se devuelve la contraseña validada
     }
-    
+
 }
